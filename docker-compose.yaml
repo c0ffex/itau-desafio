@@ -1,0 +1,22 @@
+services:
+  # Name of our PostgreSQL service.
+  postgres-db:
+    image: postgres:16-alpine
+
+    container_name: my_project_postgres
+
+    environment:
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=devsecret
+      - POSTGRES_DB=transaction_db
+
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+    driver: local
