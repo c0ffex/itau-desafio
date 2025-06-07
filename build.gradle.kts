@@ -6,6 +6,7 @@ plugins {
 	kotlin("plugin.jpa") version "1.9.25"
 }
 
+
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
@@ -27,15 +28,15 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.jetbrains.kotlin:kotlin-test-junit5")
+	runtimeOnly("org.junit.platform:junit-platform-launcher")
+	implementation("io.mockk:mockk:1.13.5")
 
 	runtimeOnly("org.postgresql:postgresql")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.flywaydb:flyway-database-postgresql")
+	implementation(kotlin("test"))
 }
 
 kotlin {
@@ -52,4 +53,11 @@ allOpen {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.test {
+	testLogging {
+		events("passed", "skipped", "failed")
+		showStandardStreams = true
+	}
 }
