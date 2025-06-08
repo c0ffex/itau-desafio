@@ -7,16 +7,14 @@ import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
-class CreateTransactionService {
-    @Service
-    class TransactionService(
-        private val transactionRepository: TransactionRepository
-    ) {
-        @Transactional
-        fun execute(request: TransactionRequest): Transaction {
-            val formattedValue = (request.valor*100).toLong()
-            val transactionTime = LocalDateTime.now()
-            return transactionRepository.save(Transaction(valor = formattedValue, horaData = transactionTime))
-        }
+@Service
+class CreateTransactionService(
+    private val transactionRepository: TransactionRepository
+) {
+    @Transactional
+    fun execute(request: TransactionRequest): Transaction {
+        val formattedValue = (request.valor*100).toLong()
+        val transactionTime = LocalDateTime.now()
+        return transactionRepository.save(Transaction(valor = formattedValue, horaData = transactionTime))
     }
 }
