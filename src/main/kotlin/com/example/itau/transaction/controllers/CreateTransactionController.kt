@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/transacao")
 class TransactionController(
-    private val transactionService: CreateTransactionService.TransactionService,
+    private val transactionService: CreateTransactionService,
     private val findTransactionsService: FindTransactionsInPeriod
 ) {
     @PostMapping
